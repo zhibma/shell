@@ -27,3 +27,9 @@ shopt -s expand_aliases
 # when script is excuted through system PATH search, both two are invalid.
 cd $(dirname ${0})
 cd ${0%/*} 2>/dev/null
+
+# Command output of ls not equals to echo "$(ls)", the latter display by line,
+# so the output of it can be used as a line based pipe.
+ls
+echo "$(ls)"
+ls | awk '{print $0}'
