@@ -1,0 +1,25 @@
+#!/bin/sh
+
+cat <<EOF | /bin/expect -d
+set timeout 10
+
+spawn ./example.sh
+
+proc expect_new {pattern string} {
+    expect {
+        "\${pattern}" {
+            send -- "\${string}"
+        }
+        default {
+            puts "Try match pattern \"\${pattern}\" timeout or failed, exit..."
+            exit 127
+        }
+    }
+}
+
+expect_new "AAAA YYY" "ttttt iii\n"
+
+wait
+EOF
+
+exit ${?}
