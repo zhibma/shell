@@ -19,7 +19,7 @@ proc expect_new {pattern string} {
 
 expect_new "AAAA YYY" "ttttt iii\n"
 
-wait
+expect -timeout -1 eof
 EOF
 
 exit ${?}
